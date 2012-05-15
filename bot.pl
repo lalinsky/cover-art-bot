@@ -63,6 +63,7 @@ for my $l (@mbids) {
 sub fetch_image {
 	my $url = shift;
 
+	return 0 unless $url =~ /^https?/;
 	return 0 unless $url =~ /\/([^\/]+)$/;
 	my $filename = $tmpdir.$1;
 	my $r = getstore($url, "$filename");
