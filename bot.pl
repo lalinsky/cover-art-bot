@@ -56,6 +56,18 @@ for my $l (@mbids) {
 		next;
 	}
 
+	my $out = `identify $filename`;
+	if ($out =~ /JPEG (\d+)x(\d+) /) {
+		if ($1 < 300 || $2 < 300) {
+			print STDERR "Image too small $1x$2.\n";
+			next;
+		}
+	}
+	else {
+		print STDERR "Unknown format.\n";
+		next;
+	}
+
 	my $rv = $bot->run($l, $filename);
 	$max--;
 }
